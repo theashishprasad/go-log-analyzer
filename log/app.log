@@ -1,8 +1,10 @@
-INFO Application started
-INFO User logged in
-WARN Slow response
-ERROR Database timeout
-INFO Request completed
-ERROR API failed
+INFO App started
+
+DEBUG Request received
+TRACE Request payload
 WARN Cache miss
-INFO Health check passed
+
+
+ERROR Database timeout
+INFO User logged in
+DEBUG Response generated

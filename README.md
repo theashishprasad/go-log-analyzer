@@ -1,8 +1,8 @@
 # Go Log Analyzer
 
-A simple Go CLI application that analyzes application log files and generates statistics for log levels such as INFO, WARN, and ERROR.
+A simple Go CLI application that analyzes application log files and generates statistics for log levels dynamically.
 
-This project was built as part of my Go learning journey focused on backend, cloud, and platform engineering concepts.
+This project was built as part of my Go learning journey focused on backend, cloud, platform engineering, and Go development.
 
 ## Project Goal
 
@@ -10,20 +10,22 @@ The goal of this project is to:
 
 * Learn Go project structure and package organization
 * Practice file handling and line-by-line processing
-* Work with structs, functions, and error handling
+* Work with structs, maps, functions, and error handling
 * Analyze log files and generate useful statistics
 * Build a foundation for more advanced Go CLI tools
+* Understand how to design scalable and maintainable Go code
 
 ## Features
 
 ### Current Features
 
 * Read log files from disk
-* Count INFO log entries
-* Count WARN log entries
-* Count ERROR log entries
+* Detect log levels dynamically
+* Count occurrences of each log level using maps
+* Support any log level (INFO, WARN, ERROR, DEBUG, TRACE, etc.)
 * Handle file access errors gracefully
 * Modular project structure using Go packages
+* Safe handling of empty lines in log files
 
 ### Planned Features
 
@@ -33,6 +35,7 @@ The goal of this project is to:
 * Track most frequent error messages
 * Export results as JSON
 * Add unit tests
+* Sort output by log level or frequency
 
 ## Project Structure
 
@@ -40,7 +43,7 @@ The goal of this project is to:
 go-log-analyzer/
 ├── analyzer/
 │   └── analyzer.go
-├── logs/
+├── log/
 │   └── app.log
 ├── main.go
 ├── go.mod
@@ -67,14 +70,16 @@ go run main.go
 Example log file:
 
 ```text
-INFO Application started
-INFO User logged in
-WARN Slow response
-ERROR Database timeout
-INFO Request completed
-ERROR API failed
+INFO App started
+
+DEBUG Request received
+TRACE Request payload
 WARN Cache miss
-INFO Health check passed
+
+
+ERROR Database timeout
+INFO User logged in
+DEBUG Response generated
 ```
 
 ## Sample Output
@@ -82,16 +87,21 @@ INFO Health check passed
 ```text
 Log Analysis Result
 
-INFO  : 4
-WARN  : 2
-ERROR : 2
+INFO   : 2
+DEBUG  : 2
+TRACE  : 1
+WARN   : 1
+ERROR  : 1
 ```
+
+> Note: Output order may vary because Go maps do not guarantee iteration order.
 
 ## Technologies Used
 
 * Go
 * bufio.Scanner
 * File I/O
+* Maps
 * Structs
 * Functions
 * Error Handling
@@ -103,15 +113,38 @@ Through this project I practiced:
 
 * Reading files in Go
 * Processing text line-by-line
-* Working with structs
+* Working with maps for dynamic data aggregation
 * Creating reusable packages
 * Returning multiple values from functions
 * Handling errors using idiomatic Go patterns
 * Building command-line applications
+* Refactoring code from a fixed design to a scalable design
+
+## Key Concepts Learned
+
+### Version 1
+
+* Structs
+* Functions
+* Packages
+* File handling
+* Error handling
+
+### Version 2
+
+* Maps
+* Dynamic aggregation
+* map[string]int
+* make()
+* Iterating over maps
+* Scalable data structures
 
 ## Future Enhancements
 
 * Command-line argument support
+* Total log line count
+* Log level percentages
+* Top error frequency analysis
 * JSON export
 * Concurrent log processing
 * Unit tests

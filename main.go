@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	stats, err := analyzer.AnalyzeLog("logs/app.log")
+	stats, err := analyzer.AnalyzeLog("log/app.log")
 
 	if err != nil {
 		fmt.Println("Error:", err)
@@ -17,7 +17,7 @@ func main() {
 	fmt.Println("Log Analysis Result")
 	fmt.Println()
 
-	fmt.Printf("INFO  : %d\n", stats.InfoCount)
-	fmt.Printf("WARN  : %d\n", stats.WarnCount)
-	fmt.Printf("ERROR : %d\n", stats.ErrorCount)
+	for key, val := range stats.Counts {
+		fmt.Printf("%s : %d\n", key, val)
+	}
 }
