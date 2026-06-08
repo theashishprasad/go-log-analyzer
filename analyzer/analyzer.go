@@ -7,13 +7,13 @@ import (
 )
 
 type LogStats struct {
-	InfoCount  int
-	WarnCount  int
-	ErrorCount int
+	Counts map[string]int
 }
 
 func AnalyzeLog(filePath string) (LogStats, error) {
-	stats := LogStats{}
+	stats := LogStats{
+		Counts: make(map[string]int),
+	}
 
 	file, err := os.Open(filePath)
 	if err != nil {
@@ -27,13 +27,15 @@ func AnalyzeLog(filePath string) (LogStats, error) {
 	for scanner.Scan() {
 		line := scanner.Text()
 
-		if strings.HasPrefix(line, "INFO") {
-			stats.InfoCount++
-		} else if strings.HasPrefix(line, "WARN") {
-			stats.WarnCount++
-		} else if strings.HasPrefix(line, "ERROR") {
-			stats.ErrorCount++
+		fields := strings.Fields(line)
+		
+		if len(fields) == 0 {
+			continue
 		}
+
+		level := fields[0]
+		
+		stats.Counts[level]++
 	}
 
 	if err := scanner.Err(); err != nil {
