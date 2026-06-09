@@ -22,6 +22,7 @@ The goal of this project is to:
 * Read log files from disk
 * Detect log levels dynamically
 * Count occurrences of each log level using maps
+* Generate percentage distribution for log levels
 * Support any log level (INFO, WARN, ERROR, DEBUG, TRACE, etc.)
 * Handle file access errors gracefully
 * Modular project structure using Go packages
@@ -31,7 +32,6 @@ The goal of this project is to:
 
 * Accept log file path as a command-line argument
 * Display total log entries processed
-* Generate log level percentages
 * Track most frequent error messages
 * Export results as JSON
 * Add unit tests
@@ -76,7 +76,6 @@ DEBUG Request received
 TRACE Request payload
 WARN Cache miss
 
-
 ERROR Database timeout
 INFO User logged in
 DEBUG Response generated
@@ -87,11 +86,11 @@ DEBUG Response generated
 ```text
 Log Analysis Result
 
-INFO   : 2
-DEBUG  : 2
-TRACE  : 1
-WARN   : 1
-ERROR  : 1
+INFO  : 2 (28.57%)
+DEBUG : 2 (28.57%)
+TRACE : 1 (14.29%)
+WARN  : 1 (14.29%)
+ERROR : 1 (14.29%)
 ```
 
 > Note: Output order may vary because Go maps do not guarantee iteration order.
@@ -119,6 +118,8 @@ Through this project I practiced:
 * Handling errors using idiomatic Go patterns
 * Building command-line applications
 * Refactoring code from a fixed design to a scalable design
+* Performing percentage calculations
+* Formatting floating-point output
 
 ## Key Concepts Learned
 
@@ -139,11 +140,19 @@ Through this project I practiced:
 * Iterating over maps
 * Scalable data structures
 
+### Version 3
+
+* Percentage calculations
+* Integer vs floating-point division
+* float64 conversions
+* Formatted output with fmt.Printf
+* Basic statistical reporting
+* Division-by-zero handling
+
 ## Future Enhancements
 
 * Command-line argument support
 * Total log line count
-* Log level percentages
 * Top error frequency analysis
 * JSON export
 * Concurrent log processing
