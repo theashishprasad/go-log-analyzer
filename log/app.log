@@ -1,10 +1,9 @@
-INFO App started
-
-DEBUG Request received
-TRACE Request payload
-WARN Cache miss
-
+INFO Started
 
 ERROR Database timeout
-INFO User logged in
-DEBUG Response generated
+
+ERROR Database timeout
+
+WARN Cache miss
+
+ERROR API failed
