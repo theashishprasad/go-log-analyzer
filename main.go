@@ -32,6 +32,22 @@ func main() {
 
 	for key, val := range stats.Counts {
 		percentage := (float64(val) / float64(total)) * 100
-		fmt.Printf("%s : %d (%.2f%%)\n", key, val, percentage)
+
+		fmt.Printf("%s : %d (%.2f%%)\n",
+			key,
+			val,
+			percentage,
+		)
+	}
+
+	fmt.Println("\nTop Errors\n")
+
+	if len(stats.TopErrors) == 0 {
+		fmt.Println("No errors found")
+		return
+	}
+
+	for key, val := range stats.TopErrors {
+		fmt.Printf("%s : %d\n", key, val)
 	}
 }

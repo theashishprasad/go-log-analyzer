@@ -7,12 +7,14 @@ import (
 )
 
 type LogStats struct {
-	Counts map[string]int
+	Counts    map[string]int
+	TopErrors map[string]int
 }
 
 func AnalyzeLog(filePath string) (LogStats, error) {
 	stats := LogStats{
-		Counts: make(map[string]int),
+		Counts:    make(map[string]int),
+		TopErrors: make(map[string]int),
 	}
 
 	file, err := os.Open(filePath)
@@ -28,14 +30,22 @@ func AnalyzeLog(filePath string) (LogStats, error) {
 		line := scanner.Text()
 
 		fields := strings.Fields(line)
-		
+
 		if len(fields) == 0 {
 			continue
 		}
 
 		level := fields[0]
-		
+
 		stats.Counts[level]++
+
+		if level == "ERROR" {
+			message := strings.Join(fields[1:], " ")
+
+			if message != "" {
+				stats.TopErrors[message]++
+			}
+		}
 	}
 
 	if err := scanner.Err(); err != nil {
