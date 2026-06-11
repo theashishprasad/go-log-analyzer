@@ -20,6 +20,7 @@ The goal of this project is to:
 ### Current Features
 
 * Read log files from disk
+* Accept log file path as a command-line argument
 * Detect log levels dynamically
 * Count occurrences of each log level using maps
 * Generate percentage distribution for log levels
@@ -31,11 +32,13 @@ The goal of this project is to:
 
 ### Planned Features
 
-* Accept log file path as a command-line argument
 * Export results as JSON
 * Add unit tests
-* Sort output by log level or frequency
+* Sort output by log level frequency
+* Sort top errors by occurrence count
 * Concurrent log processing
+* Docker support
+* Kubernetes deployment examples
 
 ## Project Structure
 
@@ -59,10 +62,28 @@ git clone https://github.com/theashishprasad/go-log-analyzer.git
 cd go-log-analyzer
 ```
 
-Run the application:
+Run using the sample log file:
+
+```bash
+go run main.go log/app.log
+```
+
+Run using your own log file:
+
+```bash
+go run main.go production.log
+```
+
+If no file is provided:
 
 ```bash
 go run main.go
+```
+
+Output:
+
+```text
+Usage: go run main.go <log-file>
 ```
 
 ## Sample Input
@@ -171,9 +192,16 @@ Through this project I practiced:
 * Working with multiple maps
 * Basic operational analytics
 
+### Version 5
+
+* os.Args
+* Command-line arguments
+* Input validation
+* CLI application development
+* User-provided file input
+
 ## Future Enhancements
 
-* Command-line argument support
 * JSON export
 * Concurrent log processing
 * Unit tests
