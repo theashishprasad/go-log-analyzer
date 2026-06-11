@@ -2,12 +2,22 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/theashishprasad/log-analyzer/analyzer"
 )
 
 func main() {
-	stats, err := analyzer.AnalyzeLog("log/app.log")
+	arguments := os.Args
+
+	if len(arguments) != 2 {
+		fmt.Println("Usage: go run main.go <log-file>")
+		return
+	}
+
+	filename := arguments[1]
+
+	stats, err := analyzer.AnalyzeLog(filename)
 
 	if err != nil {
 		fmt.Println("Error:", err)
